@@ -858,6 +858,14 @@ fn reborn_contracts_crates_carry_a_checked_size_ceiling() {
         // already banked inside the +150 window since the 2026-08-31 pin;
         // per the capture rule the pin re-captures the measured count, read
         // from this test's own failure message.
+        // Command-menu registration (2026-09-03/08, PR #8072) rides inside
+        // the +150 working window on top of the 13_026 pin: the
+        // `activation_calls`/`deactivation_calls` recipe lists on
+        // `ChannelIngressDescriptor`, the per-list cap in
+        // `ChannelDescriptor::validate` (`TooManyIngressVendorCalls`), and
+        // the cap's inline test (~63 lines). Declaration and shape
+        // validation only; execution stays in ironclaw_extension_host's
+        // lifecycle.
         ("ironclaw_extension_contracts", 13_026),
         // Raised 17_501 -> 18_570 by #6831 (standardized messaging framework):
         // the growth is the `messaging` vocabulary — the StandardMessagingOp
